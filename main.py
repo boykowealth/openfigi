@@ -16,76 +16,7 @@ def equity_figi_data(exchCode=None, securityType=None, includeUnlistedEquities=F
     url = "https://api.openfigi.com/v3/search"
     headers = {
         "Content-Type": "application/json",
-        "X-OPENFIGI-APIKEY": "27240821-9956-4377-a5d6-895bc51059d4"
-    }
-
-    marketSecDes = 'Equity'
-
-    payload = {
-        "exchCode": exchCode,
-        "marketSecDes": marketSecDes,
-        "securityType": securityType,
-        "includeUnlistedEquities": includeUnlistedEquities,
-    }
-
-    results = []
-    columns = {
-                'figi': ['00'], 
-                'name': ['00'], 
-                'ticker': ['00'], 
-                'exchCode': ['00'], 
-                'compositeFIGI': ['00'], 
-                'securityType': ['00'], 
-                'marketSector': ['00'], 
-                'shareClassFIGI': ['00'], 
-                'securityType2': ['00'], 
-                'securityDescription': ['00']
-                }
-
-    while True:
-        response = requests.post(url, json=payload, headers=headers)
-        print(f"Status Code: {response.status_code}")
-        
-        try:
-            response_data = response.json()
-
-        except requests.exceptions.JSONDecodeError:
-            print("Error decoding JSON response.")
-            break
-        
-        if 'data' in response_data:
-            results.extend(response_data['data'])
-        
-        next_page = response_data.get('next')
-        if not next_page:
-            time.sleep(3)  # Rate limiting
-            break
-        
-        payload["start"] = next_page  
-        time.sleep(3)  # Rate limiting
-
-    if results:
-        tracker.append(securityType)
-        return pl.DataFrame(results)
-    else:
-        return pl.DataFrame(columns, schema={
-            'figi': pl.Utf8, 
-            'name': pl.Utf8, 
-            'ticker': pl.Utf8, 
-            'exchCode': pl.Utf8, 
-            'compositeFIGI': pl.Utf8, 
-            'securityType': pl.Utf8, 
-            'marketSector': pl.Utf8, 
-            'shareClassFIGI': pl.Utf8, 
-            'securityType2': pl.Utf8, 
-            'securityDescription': pl.Utf8
-        })
-    
-def equity_figi_data(exchCode=None, securityType=None, includeUnlistedEquities=False):
-    url = "https://api.openfigi.com/v3/search"
-    headers = {
-        "Content-Type": "application/json",
-        "X-OPENFIGI-APIKEY": "27240821-9956-4377-a5d6-895bc51059d4"
+        "X-OPENFIGI-APIKEY": "YOUR_KEY"
     }
 
     marketSecDes = 'Equity'
