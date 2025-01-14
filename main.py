@@ -254,7 +254,7 @@ def bw_db():
 
     df_p = df.to_pandas()
     df_p = df_p[df_p['FIGI'] != '00']
-    df_p.to_feather(r"C:\Users\Brayden Boyko\OneDrive\BOYKO TERMINAL\PROGRAMS\Data\Data Hub\TERMINAL\ASSET_LIST.feather")
+    df_p.to_feather(r"C:\Users\YOUR_NAME\YOUR_LOCATION.feather")
     print(df)
 
     unique_values = list(set(tracker))
